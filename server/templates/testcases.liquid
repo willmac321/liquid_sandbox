@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <title>test cases</title>
+  </head>
+
+  <body>
+    {% assign test_cases = testcases %}
+    <h1>{{ dot_variable_name.created_time | split: '~' | first }}</h1>
+
+    <h2>{{ dot_variable_name.created_time | split: '~' | last }}</h2>
+
+    <h2>There are currently {{test_cases | count}} items</h2>
+
+    <ul id="test_cases">
+
+      {% for test_case in test_cases %}
+        <li>
+          <h3>Test Case:</h3>
+          <span> input: {{test_case.["dot_variable_name.created_time"]}}</span>
+          <br/>
+          <span> output: 
+            {% capture time %}{{ test_case.["dot_variable_name.created_time"] | json }} {% endcapture %}
+            {%if time contains ':' %}
+              {{time | date: "%s"}}
+            {% elsif time contains '.' %}
+              {{time | floor}}
+            {% else %}
+              {{time}}
+            {% endif %}
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

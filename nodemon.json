@@ -1,0 +1,11 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+  "watch": [
+    "server/templates",
+    "server/"
+  ],
+  "ext": "rb yml js css scss"
+}
